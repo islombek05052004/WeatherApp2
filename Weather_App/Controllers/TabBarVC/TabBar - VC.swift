@@ -19,30 +19,34 @@ class TabBarViewController: UITabBarController {
         
         let homeNavImage = UIImage(named: "homeImage")?.resizeImage(
             targetSize: CGSize(width: 30, height: 30))
-        homeNavImage?.withTintColor(.white, renderingMode: .alwaysTemplate)
-        
-        let homeNavSelectedImage = UIImage(named: "homeSelectedImage")?.resizeImage(
-            targetSize: CGSize(width: 30, height: 30))
-        homeNavSelectedImage?.withTintColor(.white)
-        
-        homeNav.tabBarItem = UITabBarItem(
-            title: nil,
-            image: homeNavImage,
-            selectedImage: homeNavSelectedImage
-        )
-        
-        let daysNavImage = UIImage(named: "daysImage")?.resizeImage(
-            targetSize: CGSize(width: 30, height: 30))
-        daysNavImage?.withTintColor(.white)
         
         let daysNavSelectedImage = UIImage(named: "daysSelectedImage")?.resizeImage(
             targetSize: CGSize(width: 30, height: 30))
+        
+        let homeNavSelectedImage = UIImage(named: "homeSelectedImage")?.resizeImage(
+            targetSize: CGSize(width: 30, height: 30))
+        
+        let daysNavImage = UIImage(named: "daysImage")?.resizeImage(
+            targetSize: CGSize(width: 30, height: 30))
+        
+        homeNavImage?.withTintColor(.white, renderingMode: .alwaysTemplate)
+        
+        homeNavSelectedImage?.withTintColor(.white)
+        
+        daysNavImage?.withTintColor(.white)
+        
         daysNavSelectedImage?.withTintColor(.white)
         
         daysNav.tabBarItem = UITabBarItem(
             title: nil,
             image: daysNavImage,
             selectedImage: daysNavSelectedImage
+        )
+        
+        homeNav.tabBarItem = UITabBarItem(
+            title: nil,
+            image: homeNavImage,
+            selectedImage: homeNavSelectedImage
         )
         
         self.viewControllers = [homeNav, daysNav]
@@ -66,5 +70,26 @@ class TabBarViewController: UITabBarController {
 
         UINavigationBar.appearance().standardAppearance = appereanse1
         UINavigationBar.appearance().scrollEdgeAppearance = appereanse1
+    }
+    
+    private func setUpTabbarRectangle() {
+        
+        
+        let roundRect = CAShapeLayer()
+        
+        let bezierPath = UIBezierPath(
+            roundedRect: CGRect(x: 0,
+                                y: tabBar.bounds.height - 60,
+                                width: tabBar.bounds.width,
+                                height: tabBar.bounds.height + 60),
+            byRoundingCorners: [.topLeft, .topRight],
+            cornerRadii: CGSize(width: 20, height: 20))
+        
+        roundRect.path = bezierPath.cgPath
+        roundRect.fillColor = UIColor.rgb(r: <#T##CGFloat#>, g: <#T##CGFloat#>, b: <#T##CGFloat#>)
+        
+        tabBar.layer.insertSublayer(roundRect, at: 0)
+        tabBar.backgroundColor = .clear
+        tabBar.isTranslucent = true
     }
 }
