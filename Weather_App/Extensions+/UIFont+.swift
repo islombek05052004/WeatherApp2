@@ -5,4 +5,14 @@
 //  Created by Abdurazzoqov Islombek on 13/03/24.
 //
 
-import Foundation
+import UIKit
+
+extension UIFont {
+    
+    static func futura(fontSize: CGFloat) -> UIFont? {
+        
+        UIFont.init(name: "Futura", size: fontSize)
+        
+    }
+    
+}

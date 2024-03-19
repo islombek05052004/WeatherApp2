@@ -9,11 +9,12 @@ import UIKit
 
 extension UITextField {
     
-    convenience init(backColor: UIColor,
-                     placeholder: String?,
-                     font: UIFont = .systemFont(ofSize: 22, weight: .regular),
-                     autoCorrectType: UITextAutocorrectionType = .no,
-                     borderStyle: BorderStyle = .roundedRect
+    convenience init(
+        backColor: UIColor,
+        placeholder: String? = nil,
+        font: UIFont? = .systemFont(ofSize: 22, weight: .regular),
+        autoCorrectType: UITextAutocorrectionType = .no,
+        borderStyle: BorderStyle = .roundedRect
     ) {
         self.init()
         self.backgroundColor = backColor

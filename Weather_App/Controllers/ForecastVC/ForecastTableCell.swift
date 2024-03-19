@@ -9,8 +9,6 @@ import UIKit
 
 class ForecastTableCell: UITableViewCell {
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -18,5 +16,4 @@ class ForecastTableCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

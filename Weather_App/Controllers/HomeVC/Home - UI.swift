@@ -7,9 +7,6 @@
 
 import UIKit
 
-private let deviceWidth = UIScreen.main.bounds.width
-private let deviceHeight = UIScreen.main.bounds.height
-
 final class HomeVCHomeView: UIView {
     
     private let mainScrollView = UIScrollView()
@@ -17,7 +14,7 @@ final class HomeVCHomeView: UIView {
         arrangedSubviews: [],
         axis: .vertical,
         spacing: 40,
-        contentInsets: .init(top: 0, left: 10, bottom: 10, right: 10)
+        contentInsets: .init(top: 0, left: 10, bottom: 40, right: 10)
     )
     
     private let cityNameLabel = UILabel(text: "*****",
@@ -71,6 +68,7 @@ final class HomeVCHomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+                
         toFormUIElements()
     }
     
@@ -88,22 +86,9 @@ extension HomeVCHomeView {
         toFormSecondMainInformationStackView()
     }
     
-    private func setGradient() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.rgb(r: 17, g: 20, b: 44).cgColor,
-            UIColor.rgb(r: 10, g: 19, b: 48).cgColor,
-            UIColor.rgb(r: 3, g: 5, b: 9).cgColor
-        ]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = CGRect(x: 0,
-                                     y: 0,
-                                     width: UIScreen.main.bounds.width,
-                                     height: UIScreen.main.bounds.height)
-        self.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
     private func toFormMainScrollStackView() {
+        
+        mainScrollView.showsVerticalScrollIndicator = false
         
         addSubview(mainScrollView)
         mainScrollView.addSubview(mainStackView)
@@ -112,8 +97,8 @@ extension HomeVCHomeView {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         mainScrollView.leftAnchor(leftAnchor, 0)
-        mainScrollView.topAnchor(self.topAnchor, 0)
-        mainScrollView.bottomAnchor(self.safeAreaLayoutGuide.bottomAnchor, -10)
+        mainScrollView.topAnchor(topAnchor, 0)
+        mainScrollView.bottomAnchor(safeAreaLayoutGuide.bottomAnchor, 0)
         mainScrollView.widthAnchor(width: UIScreen.main.bounds.width)
         
         mainStackView.leftAnchor(mainScrollView.leftAnchor, 0)
@@ -159,9 +144,12 @@ extension HomeVCHomeView {
         
         mainStackView.addArrangedSubview(firstMainInformationStackView)
         
+        temperatureLabel.setShadow(5, 5, UIColor.gray.cgColor, 1, 6)
+        
+        weatherTypeImageView.setShadow(5, 10, UIColor.white.cgColor, 0.7, 10)
         weatherTypeImageView.translatesAutoresizingMaskIntoConstraints = false
-        weatherTypeImageView.tintColor = .yellow
-        weatherTypeImageView.widhtHeight(deviceWidth * 0.6, deviceWidth * 0.6)
+        weatherTypeImageView.widhtHeight(Paddings.deviceWidth * 0.6,
+                                         Paddings.deviceWidth * 0.6)
         
         atributeWeatherLabel.numberOfLines = 0
     }
@@ -219,12 +207,12 @@ extension HomeVCHomeView {
         
         mainStackView.addArrangedSubview(currentMainStackView)
         
-        currentMainStackView.backgroundColor = .rgb(r: 14, g: 34, b: 70)
+        currentMainStackView.backgroundColor = .rgb(r: 14, g: 34, b: 90)
         currentMainStackView.layer.cornerRadius = 20
         
     }
     
-    func updateInterface(weatherData: WeatherReadyData) {
+    func updateInterface(weatherData: ReadyWeatherData) {
         
         let currentDate = Date()
         let nameFormatter = DateFormatter()

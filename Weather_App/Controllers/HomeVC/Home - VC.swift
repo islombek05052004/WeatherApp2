@@ -27,7 +27,6 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         self.view = mainView
-        setNavigationItems()
     }
     
     override func viewDidLoad() {
@@ -35,10 +34,7 @@ class HomeViewController: UIViewController {
         
         coreLocation.delegate = self
         coreLocation.requestAlwaysAuthorization()
-    }
-    
-    @objc private func searchTapped() {
-        self.presenter.searchTapped()
+        coreLocation.startUpdatingLocation()
     }
 }
 
@@ -46,7 +42,6 @@ extension HomeViewController: CLLocationManagerDelegate {
    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.presenter.updateInterfaceWithLocation(manager: manager)
-
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -54,19 +49,3 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
-
-extension HomeViewController {
-    
-    private func setNavigationItems() {
-        
-        let searchBtn = UIBarButtonItem(
-            image: UIImage(systemName: "magnifyingglass"),
-            style: .done,
-            target: self,
-            action: #selector(searchTapped)
-        )
-        searchBtn.tintColor = .white
-        
-        self.navigationItem.rightBarButtonItem = searchBtn
-    }
-}
